@@ -1,21 +1,26 @@
-# Palindromic
+# 04 -- Frequency Filer
 
 ## Description
 
-Write a program that asks the user for one or more sentences and then lets the user know if it is a palindrome.
+Write a program that looks for a file called `sample.txt`. This file will contain the text of a book, part of a book, or speech in plain text format. It reads this file and then returns the top 20 words used in the text and the number of times they are used.
 
 ## Tasks
-
 ```markdown
 * [ ] Blank slate
-  * [ ] Create a GitHub repo called `palindromic`
-  * [ ] Put a `README.md` file in it and copy palindrome.py and palindrome_test.py from this repository into it.
+  * [ ] Create a GitHub repo called `frequency-filer`
+  * [ ] Put a `README.md` file in it and copy word_frequency.py, word_frequency_test.py, and sample.txt from this repository into it.
 * [ ] Normal Mode
-  * [ ] Write your `main()` function to ask the user for a word/sentence, pass it into the is_palindrome function, and state whether or not the the sentence is palindromic
-  * [ ] Write your `is_palindrome` function **using recursion**
-  * [ ] Run palindrome_test.py and ensure you pass all the tests
+  * [ ] Open `sample.txt` and read in the text
+  * [ ] Count the number of times each word is used, regardless of capitalization
+  * [ ] Find the top 20 words used and output them and their frequency to stdout
+  * [ ] Run word_frequency_test.py and ensure you pass all the tests
 * [ ] Hard Mode (optional)
-  * [ ] Make an iterative version of your `is_palindrome` function (using loops instead of recursion), and ensure it passes the tests too
+  * [ ] Add a list of ignored words and don't count these in the word frequencies
+  * [ ] Make your program take the name of the file to read on the command line, so it doesn't just have to work with `sample.txt`.
+* [ ] Nightmare Mode (optional)
+  * [ ] Output the top 20 words' frequencies using a simple text-based histogram
+  * [ ] Normalize the histogram so there are never more than 50 `#` marks.
+
 ```
 
 ## Objectives
@@ -24,52 +29,91 @@ Write a program that asks the user for one or more sentences and then lets the u
 
 After completing this assignment, you should understand:
 
-* Manipulating strings
-* How strings are related to lists
-* Recursion
+* Reducing a collection into another form
 
 ### Performance Objectives
 
 After completing this assignment, you should be able to:
 
-* Strip characters out of strings
-* Change the case of strings
-* Look at substrings
+* Open and read files
+* Create a dictionary
+* Sort a list
 
 ## Details
 
-### Deliverables
-
-* A GitHub repo called palindrome containing at least:
-  * This `README.md` file
-  * a file called `palindrome.py`
-
 ### Requirements  
 
-* Your program must pass my tests in `palindrome_test.py`. You should be able to run this with `python palindrome_test.py`.
-* You need a function called `is_palindrome` that takes a string and returns a boolean (`True` or `False`). Your program should use this function.
+* Your program must pass my tests in `word_frequency_test.py`. You should be able to run this with `python word_frequency_test.py`.
+* You need a function called `word_frequency` that takes a string and returns a dictionary of all the words used in the string and the number of times they were used.
 
 ## Normal Mode
 
-You have to write a program that, when run, asks the user to input some text. It can be a phrase, a sentence, or multiple sentences. After it is entered, your program will let the user know if it is a palindrome or not. Use "is a palindrome" and "is not a palindrome" in your output in order for the tests to pass.
+Your program should open `sample.txt` and read in the entirety of its text.
+You'll need to normalize the text so that words in different cases are still
+the same word and so it's scrubbed of punctuation. Once you've done that, go
+through the text and find the number of times each word is used.
 
-Letter casing and punctuation do not matter when testing a palindrome. All of the following are valid palindromes:
+After that, find the top 20 words used and output them to the console in
+reverse order, along with their frequency, like this:
 
-* stunt nuts
-* Lisa Bonet ate no basil.
-* A man, a plan, a cat, a ham, a yak, a yam, a hat, a canal: Panama!
-* Doc, note, I dissent. A fast never prevents a fatness. I diet on cod.
+```
+peanut 33
+racket 31
+and 29
+common 21
+religion 15
+fate 14
+algorithm 10
+the 9
+...
+```
 
 ## Hard Mode
 
-Make both an iterative and recursive version of your palindrome test function.
+In addition to the requirements from **Normal Mode**:
 
-## Notes
+1. Add a list of ignored words to your program and do not count those words in the word
+frequencies. A suggested list:
 
-You may want to use the `re.sub` function to strip out punctuation and spaces. A regular expression you can use to match all space and punctuation is `r'[^A-Za-z]'`.
+```
+a,able,about,across,after,all,almost,also,am,among,an,and,any,are,as,at,be,
+because,been,but,by,can,cannot,could,dear,did,do,does,either,else,ever,every,
+for,from,get,got,had,has,have,he,her,hers,him,his,how,however,i,if,in,into,is,
+it,its,just,least,let,like,likely,may,me,might,most,must,my,neither,no,nor,
+not,of,off,often,on,only,or,other,our,own,rather,said,say,says,she,should,
+since,so,some,than,that,the,their,them,then,there,these,they,this,tis,to,too,
+twas,us,wants,was,we,were,what,when,where,which,while,who,whom,why,will,with,
+would,yet,you,your
+```
+
+2. Change your program so that you have to give it the name of the file to read
+on the command line, like so: `python word_frequency.py sample.txt`.
+
+## Nightmare Mode
+
+3. Output the words to the console in a simple text-based histogram format,
+like so:
+
+```
+peanut    #################################
+racket    ###############################
+and       #############################
+common    #####################
+religion  ###############
+fate      ##############
+algorithm ##########
+the       #########
+...
+```
+
+4. Normalize the histogram so that you never have more than 50 `#` marks.
+You'll have to scale all the lines by some divisor if you have more than 50 of
+one word. It is ok to round down decimals with this. For example, if you have
+the word "the" 75 times and the word "and" 47 times, you'd have 50 `#` for
+"the" and 31 `#` for "and".
 
 ## Additional Resources
 
-* [Palindrome list](http://www.palindromelist.net/).
+* [Project Gutenberg](https://www.gutenberg.org/) - good source of free texts.
 * [String type in Python](https://docs.python.org/3/library/stdtypes.html#text-sequence-type-str).
 * [Regular expression operations](https://docs.python.org/3/library/re.html).
