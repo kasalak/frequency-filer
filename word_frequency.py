@@ -3,7 +3,7 @@
 import re
 
 #convert text to all lower case
-file = open('sample2.txt', 'r')
+file = open('sample.txt', 'r')
 words = file.read().lower()
 file.close()
 #get rid of sentence structure and convert text file to a list
